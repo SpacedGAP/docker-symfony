@@ -1,0 +1,39 @@
+version: '2'
+
+networks:
+    default:
+        external:
+            name: myapp
+
+services:
+    app:
+        image: tianon/true
+        volumes:
+            - $PWD:/var/www/html/app
+
+    postgres96:
+        image: postgres:9.6-alpine
+        environment:
+            POSTGRES_USER: pguser
+            POSTGRES_PASSWORD: pgpwd
+        volumes:
+            - $PWD/docke/pgdata:/var/lib/postresql/data
+              
+    php-fpm:
+        build: 
+            context: .
+            dockerfile: ./docker/php-fpm/Dockerfile
+        depends_on:
+            - postgres96
+            - app
+        volumes_from:
+            - app
+            
+    nginx:
+        image: nginx:apline
+        depends_on:
+            - php-fpm
+        volumes_from:
+            - php-fpm
+        ports:
+            - "8080:80"
