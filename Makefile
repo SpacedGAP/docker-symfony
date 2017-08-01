@@ -4,7 +4,10 @@ composer-install:
 docker-build:
 	docker-compose -p app up --build --force-recreate -d
 
-docker-rm:
+docker-stop:
+	docker stop `docker-compose -p app ps -q`
+
+docker-rm: docker-stop
 	docker-compose -p app rm -s
 
 docker-php-fpm-bash:
