@@ -1,6 +1,12 @@
 composer-install:
 	docker run --rm -v $$PWD:/app -v ~/.ssh:/root/.ssh -u 1000 composer/composer install
 
+docker-network-create:
+	docker network create myapp
+
+docker-network-rm:
+	docker network rm myapp
+
 docker-build:
 	docker-compose -p app up --build --force-recreate -d
 
@@ -13,15 +19,9 @@ docker-rm: docker-stop
 docker-php-fpm-bash:
 	docker-compose -p app exec php-fpm /bin/bash
 
-docker-create-app-database:
-	docker-compose -p app exec php-fpm php bin/console doctrine:database:create
+app-database-create:
+	docker-compose -p app exec --user 1000 php-fpm php bin/console doctrine:database:create
 
-docker-create-network:
-	docker network create myapp
+first-build: docker-network-create composer-install docker-build app-database-create
 
-docker-rm-network:
-	docker network rm myapp
-
-first-build: docker-create-network composer-install docker-build docker-create-app-database
-
-kill: docker-rm docker-rm-network
+kill: docker-rm docker-network-rm
