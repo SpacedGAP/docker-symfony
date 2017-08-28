@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <!-- Title -->
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <meta charset="UTF-8">
+        <meta name="description" content="{% block meta_description %}Meta Description{% endblock %}" />
+        <meta name="keywords" content="{% block meta_keywords %}meta_keywords{% endblock %}" />
+        <meta name="author" content="{% block meta_author %}Meta Author{% endblock %}" />
+
+        <!-- Styles -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/build/vendor.css') }}">
+        {% block stylesheets %}{% endblock %}
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="{{ asset('assets/build/manifest.js') }}"></script>
+        <script src="{{ asset('assets/build/vendor.js') }}"></script>
+    </head>
+
+    <body class="{% block body_class%}{% endblock %}">
+        {% include 'base/component/loader.html.twig' %}
+
+        <div class="mn-content valign-wrapper">
+            <main class="mn-inner container">
+                <div class="valign">
+                    {% block body %}
+                        <div id="fos_user_content">
+                            {% block fos_user_content %}
+                            {% endblock fos_user_content %}
+                        </div>
+                    {% endblock %}
+                </div>
+            </main>
+        </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,5 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% extends "::base.html.twig" %}
+{% extends "::base/generic.html.twig" %}
+
+{% block body_class %}signin-page{% endblock %}
 
 {% block fos_user_content %}
     {{ include('@FOSUser/Security/login_content.html.twig') }}
