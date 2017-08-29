@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -21,6 +22,14 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string $email
+     * 
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @Assert\Email()
+     */
+    protected $email;
 
     public function __construct()
     {

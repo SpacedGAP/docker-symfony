@@ -1,0 +1,36 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col s12 m6 l4 offset-l4 offset-m3">
+        <div class="card white darken-1">
+            <div class="card-content ">
+                <span class="card-title">Sign Up</span>
+                <div class="row">
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                        <div class="input-field col s12">
+                            {{ form_widget(form.email) }}
+                            {{ form_label(form.email) }}
+                        </div>
+
+                        <div class="input-field col s12">
+                            {{ form_widget(form.plainPassword.first) }}
+                            {{ form_label(form.plainPassword.first) }}
+                        </div>
+
+                        <div class="input-field col s12">
+                            {{ form_widget(form.plainPassword.second) }}
+                            {{ form_label(form.plainPassword.second) }}
+                        </div>
+
+                        <div class="col s12 right-align m-t-sm">
+                            <a href="{{ url('fos_user_security_login') }}" class="waves-effect waves-grey btn-flat">Sign in</a>
+                            <input type="submit" value="{{ 'registration.submit'|trans }}" class="waves-effect waves-light btn teal" />
+                        </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

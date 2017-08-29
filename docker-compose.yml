@@ -9,15 +9,15 @@ services:
     app:
         image: tianon/true
         volumes:
-            - $PWD:/var/www/app
-
+            - .:/var/www/app
+                           
     postgres96:
         image: postgres:9.6-alpine
         environment:
             POSTGRES_USER: pguser
             POSTGRES_PASSWORD: pgpwd
         volumes:
-            - $PWD/docker-volumes/pgdata:/var/lib/postresql/data
+            - ./docker-volumes/pgdata:/var/lib/postresql/data
               
     php-fpm:
         build: 
