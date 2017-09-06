@@ -17,7 +17,7 @@ services:
             POSTGRES_USER: pguser
             POSTGRES_PASSWORD: pgpwd
         volumes:
-            - ./docker-volumes/pgdata:/var/lib/postresql/data
+            - ./docker-volumes/postgresql/data:/var/lib/postgresql/data
               
     php-fpm:
         build: 
